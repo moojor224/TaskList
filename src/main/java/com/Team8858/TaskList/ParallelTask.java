@@ -35,6 +35,11 @@ public class ParallelTask extends Task {
         for (int i = 0; i < this.list.size(); i++) { // loop through each task in the list
             if (!this.list.get(i).execute()) { // run the task
                 done = false; // if task isn't complete, set done to false
+            } else { // the task is complete
+                if (this.stopWhenDone) { // if stopWhenDone is true, the task is removed
+                    this.list.remove(i); // remove the task
+                    i--; // decrement i to continue running tasks
+                }
             }
         }
         return done;
