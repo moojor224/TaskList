@@ -4,7 +4,13 @@ import java.util.ArrayList;
 
 public class ParallelTask extends Task {
     private ArrayList<Task> list;
+    private boolean stopWhenDone = false;
 
+    /**
+     * creates a new parallel task with the given tasks
+     * 
+     * @param tasks the tasks to run
+     */
     public ParallelTask(Task... tasks) {
         super(() -> false);
         this.list = new ArrayList<Task>();
@@ -13,12 +19,22 @@ public class ParallelTask extends Task {
         }
     }
 
+    /**
+     * creates a new parallel task with the given tasks
+     * 
+     * @param tasks the tasks to run
+     */
+    public ParallelTask(boolean stopWhenDone, Task... tasks) {
+        this(tasks);
+        this.stopWhenDone = stopWhenDone;
+    }
+
     @Override
     public boolean execute() {
-        boolean done = true;
-        for (int i = 0; i < this.list.size(); i++) {
-            if (!this.list.get(i).execute()) {
-                done = false;
+        boolean done = true; // done will remain true if all tasks are complete
+        for (int i = 0; i < this.list.size(); i++) { // loop through each task in the list
+            if (!this.list.get(i).execute()) { // run the task
+                done = false; // if task isn't complete, set done to false
             }
         }
         return done;
