@@ -1,3 +1,4 @@
 {
+    "window.title": "TaskList",
     "java.compile.nullAnalysis.mode": "disabled"
 }

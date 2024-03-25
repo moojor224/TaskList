@@ -30,5 +30,5 @@ dependencies {
 }
 
 application {
-    mainClassName = 'com.TaskList.TaskList'
+    mainClassName = 'com.Team8858.TaskList.TaskList'
 }
