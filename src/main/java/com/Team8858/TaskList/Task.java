@@ -17,7 +17,7 @@ public class Task {
     /**
      * the task's main function
      */
-    private Supplier<Boolean> task;
+    private Supplier<Boolean> periodic;
 
     /**
      * creates a task without an init function
@@ -37,7 +37,7 @@ public class Task {
      */
     public Task(Runnable init, Supplier<Boolean> task) {
         this.init = init;
-        this.task = task;
+        this.periodic = task;
     }
 
     /**
@@ -49,6 +49,6 @@ public class Task {
         if (!this.initialized) {
             this.init.run();
         }
-        return this.task.get();
+        return this.periodic.get();
     }
 }

@@ -55,12 +55,19 @@ public class TaskList extends Task {
     }
 
     /**
+     * skips the next task on the list
+     */
+    public void skip() {
+        this.tasks.remove(0);
+    }
+
+    /**
      * checks if the task list is completed or not
      * 
      * @return true if the list is done (empty), false if it isn't
      */
     public boolean isDone() {
-        return this.tasks.size() == 0;
+        return this.tasks.isEmpty();
     }
 
     /**
@@ -70,11 +77,19 @@ public class TaskList extends Task {
      */
     @Override
     public boolean execute() {
-        Task t = this.tasks.get(0);
-        boolean isTaskDone = t.execute();
-        if (isTaskDone) {
-            this.tasks.remove(0);
+        if (this.tasks.size() > 0) {
+            if (this.tasks.get(0).execute()) {
+                this.tasks.remove(0);
+            }
+            return false;
         }
-        return this.isDone();
+        return true;
+    }
+
+    /**
+     * clears the task list
+     */
+    public void clear() {
+        this.tasks.clear();
     }
 }
